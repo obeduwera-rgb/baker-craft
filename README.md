@@ -27,8 +27,8 @@ Project/
 
 ## Group
 
-- Members: **Uwera Ishimwe Obed** | **Iranzi greg**
-- Registration numbers: **20251NET006** | **2025IMA045
+- Members: **Uwera Ishimwe Obed** | Iranzi greg**
+- Registration numbers: **20251NET006** | 2025IMA045**
 
 ## Figma project link
 
