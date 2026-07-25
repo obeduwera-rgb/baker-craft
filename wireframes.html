@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BakeCraft — Low-Fidelity Wireframes</title>
+<style>
+  :root{
+    --line:#8a8a8a;
+    --line-soft:#bdbdbd;
+    --fill:#e4e4e4;
+    --fill-soft:#eeeeee;
+    --ink:#4a4a4a;
+    --frame-w:320px;
+    --frame-h:690px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:60px 48px;
+    background:#f2f2f2;
+    font-family:'Courier New', monospace;
+    color:var(--ink);
+  }
+  h1{
+    font-size:20px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin:0 0 6px 0;
+  }
+  .sub{
+    font-size:13px;
+    color:#8a8a8a;
+    margin:0 0 40px 0;
+  }
+  .board{
+    display:flex;
+    flex-wrap:wrap;
+    gap:44px;
+    align-items:flex-start;
+  }
+  .screen-block{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+  }
+  .screen-label{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .screen-num{
+    font-size:12px;
+    border:1px solid var(--line);
+    padding:2px 7px;
+    border-radius:3px;
+  }
+  .screen-name{
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:0.02em;
+  }
+  .frame{
+    width:var(--frame-w);
+    height:var(--frame-h);
+    background:#ffffff;
+    border:2px solid #333;
+    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+    padding:16px 14px;
+  }
+  .statusbar{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    color:var(--line);
+    margin-bottom:10px;
+  }
+  .bar{
+    background:var(--fill);
+    border:1px solid var(--line-soft);
+    border-radius:4px;
+  }
+  .bar.text-lg{height:16px;}
+  .bar.text-md{height:11px;}
+  .bar.text-sm{height:8px;}
+  .box-x{
+    background:var(--fill-soft);
+    border:1px dashed var(--line-soft);
+    position:relative;
+    border-radius:6px;
+  }
+  .box-x::before, .box-x::after{
+    content:"";
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    background:
+      linear-gradient(to top left, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px)),
+      linear-gradient(to top right, transparent calc(50% - 0.5px), var(--line-soft) 50%, transparent calc(50% + 0.5px));
+  }
+  .row{display:flex; gap:8px;}
+  .col{display:flex; flex-direction:column; gap:8px;}
+  .grow{flex:1;}
+  .pill{
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 12px;
+    font-size:9px;
+    text-align:center;
+  }
+  .btn-block{
+    border:1.5px solid #333;
+    border-radius:8px;
+    text-align:center;
+    font-size:11px;
+    padding:12px;
+    font-weight:bold;
+  }
+  .btn-outline{
+    border:1px solid var(--line);
+    border-radius:8px;
+    text-align:center;
+    font-size:10px;
+    padding:10px;
+  }
+  .navbar{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:56px;
+    border-top:1.5px solid #333;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    background:#fff;
+  }
+  .navitem{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+  }
+  .navitem .dot{
+    width:16px; height:16px;
+    border:1.5px solid var(--line);
+    border-radius:3px;
+  }
+  .navitem .dot.active{
+    border-color:#333;
+    background:var(--fill);
+  }
+  .navitem .lbl{
+    width:20px; height:5px;
+    background:var(--line-soft);
+    border-radius:2px;
+  }
+  .annot{
+    font-size:10px;
+    color:#9a9a9a;
+    max-width:280px;
+    line-height:1.5;
+  }
+  .divider{ height:1px; background:var(--line-soft); width:100%;}
+  .tag-strip{ display:flex; gap:6px; overflow:hidden;}
+  .step-track{ display:flex; gap:4px; }
+  .step-seg{ flex:1; height:8px; border:1px solid var(--line); border-radius:2px;}
+  .step-seg.done{ background:var(--fill);}
+</style>
+</head>
+<body>
+
+<h1>BakeCraft — Wireframes (Low-Fidelity)</h1>
+<p class="sub">Structural layout only — grayscale, placeholder content, no color/type decisions applied yet. 6 screens shown (min. 4 required).</p>
+
+<div class="board">
+
+  <!-- SCREEN 1: LOGIN / REGISTER -->
+  <div class="screen-block">
+    <div class="screen-label"><span class="screen-num">01</span><span class="screen-name">Login / Register</span></div>
+    <div class="frame">
+      <div class="statusbar"><span>9:41</span><span>▮▮▮ 100%</span></div>
+      <div class="col" style="gap:26px; margin-top:40px;">
+        <div class="box-x" style="width:64px;height:64px;border-radius:50%;align-self:center;"></div>
+        <div class="bar text-lg" style="width:60%; align-self:center;"></div>
+        <div class="bar text-sm" style="width:75%; align-self:center;"></div>
+        <div class="col" style="gap:14px; margin-top:10px;">
+          <div class="bar text-sm" style="width:30%;"></div>
+          <div class="box-x" style="height:38px; border-radius:8px;"></div>
+          <div class="bar text-sm" style="width:30%;"></div>
+          <div class="box-x" style="height:38px; border-radius:8px;"></div>
+        </div>
+        <div class="btn-block">CONTINUE</div>
+        <div class="row" style="justify-content:center; gap:10px;">
+          <div class="bar text-sm" style="width:80px;"></div>
+        </div>
+        <div class="btn-outline">CONTINUE WITH GOOGLE</div>
+        <div class="bar text-sm" style="width:50%; align-self:center; margin-top:10px;"></div>
+      </div>
+    </div>
+    <div class="annot">Entry point. Toggle between login/register. Google auth reduces friction for first-time event planners.</div>
+  </div>
+
+  <!-- SCREEN 2: HOME -->
+  <div class="screen-block">
+    <div class="screen-label"><span class="screen-num">02</span><span class="screen-name">Home</span></div>
+    <div class="frame">
+      <div class="statusbar"><span>9:41</span><span>▮▮▮ 100%</span></div>
+      <div class="row" style="justify-content:space-between; align-items:center;">
+        <div class="col" style="gap:5px;">
+          <div class="bar text-sm" style="width:70px;"></div>
+          <div class="bar text-md" style="width:110px;"></div>
+        </div>
+        <div class="box-x" style="width:34px;height:34px;border-radius:50%;"></div>
+      </div>
+      <div class="box-x" style="height:34px; border-radius:20px; margin-top:14px;"></div>
+      <div class="tag-strip" style="margin-top:12px;">
+        <div class="pill" style="width:64px;">Birthday</div>
+        <div class="pill" style="width:64px;">Wedding</div>
+        <div class="pill" style="width:64px;">Corporate</div>
+        <div class="pill" style="width:64px;">Baby</div>
+      </div>
+      <div class="box-x" style="height:90px; border-radius:10px; margin-top:14px;"></div>
+      <div class="bar text-md" style="width:45%; margin-top:16px;"></div>
+      <div class="row" style="gap:10px; margin-top:10px;">
+        <div class="box-x" style="height:120px;" class="grow"></div>
+        <div class="box-x" style="height:120px;" class="grow"></div>
+      </div>
+      <div class="navbar">
+        <div class="navitem"><div class="dot active"></div><div class="lbl"></div></div>
+        <div class="navitem"><div class="dot"></div><div class="lbl"></div></div>
+        <div class="navitem"><div class="dot"></div><div class="lbl"></div></div>
+        <div class="navitem"><div class="dot"></div><div class="lbl"></div></div>
+      </div>
+    </div>
+    <div class="annot">Category chips drive discovery. "Continue your design" resume card supports returning users mid-build.</div>
+  </div>
+
+  <!-- SCREEN 3: CAKE BUILDER -->
+  <div class="screen-block">
+    <div class="screen-label"><span class="screen-num">03</span><span class="screen-name">Custom Cake Builder</span></div>
+    <div class="frame">
+      <div class="statusbar"><span>9:41</span><span>▮▮▮ 100%</span></div>
+      <div class="row" style="justify-content:space-between;">
+        <div class="bar text-sm" style="width:16px;height:16px;"></div>
+        <div class="bar text-sm" style="width:90px;"></div>
+        <div class="bar text-sm" style="width:16px;height:16px;"></div>
+      </div>
+      <div class="step-track" style="margin-top:14px;">
+        <div class="step-seg done"></div>
+        <div class="step-seg done"></div>
+        <div class="step-seg"></div>
+        <div class="step-seg"></div>
+      </div>
+      <div class="bar text-sm" style="width:40%; margin-top:10px;"></div>
+      <div class="bar text-lg" style="width:70%; margin-top:6px;"></div>
+      <div class="row" style="gap:8px; margin-top:16px;">
+        <div class="box-x" style="width:56px;height:56px;border-radius:50%;"></div>
+        <div class="box-x" style="width:56px;height:56px;border-radius:50%;"></div>
+        <div class="box-x" style="width:56px;height:56px;border-radius:50%;"></div>
+        <div class="box-x" style="width:56px;height:56px;border-radius:50%;"></div>
+      </div>
+      <div class="box-x" style="height:160px; border-radius:10px; margin-top:20px;"></div>
+      <div class="row" style="justify-content:space-between; margin-top:16px;">
+        <div class="bar text-md" style="width:70px;"></div>
+        <div class="bar text-md" style="width:70px;"></div>
+      </div>
+      <div class="row" style="gap:10px; margin-top:10px;">
+        <div class="btn-outline grow">BACK</div>
+        <div class="btn-block grow">NEXT</div>
+      </div>
+    </div>
+    <div class="annot">Core screen. Step tracker (size→flavor→frosting→toppings) doubles as a live preview placeholder.</div>
+  </div>
+
+  <!-- SCREEN 4: CART & CHECKOUT -->
+  <div class="screen-block">
+    <div class="screen-label"><span class="screen-num">04</span><span class="screen-name">Cart &amp; Checkout</span></div>
+    <div class="frame">
+      <div class="statusbar"><span>9:41</span><span>▮▮▮ 100%</span></div>
+      <div class="bar text-lg" style="width:50%; margin-top:6px;"></div>
+      <div class="row" style="gap:10px; margin-top:16px; align-items:center;">
+        <div class="box-x" style="width:56px;height:56px;border-radius:8px;"></div>
+        <div class="col grow" style="gap:6px;">
+          <div class="bar text-sm" style="width:80%;"></div>
+          <div class="bar text-sm" style="width:50%;"></div>
+        </div>
+        <div class="bar text-sm" style="width:36px;"></div>
+      </div>
+      <div class="divider" style="margin:16px 0;"></div>
+      <div class="bar text-sm" style="width:35%;"></div>
+      <div class="box-x" style="height:38px; border-radius:8px; margin-top:8px;"></div>
+      <div class="bar text-sm" style="width:35%; margin-top:12px;"></div>
+      <div class="box-x" style="height:38px; border-radius:8px; margin-top:8px;"></div>
+      <div class="row" style="gap:10px; margin-top:12px;">
+        <div class="box-x grow" style="height:38px; border-radius:8px;"></div>
+        <div class="box-x grow" style="height:38px; border-radius:8px;"></div>
+      </div>
+      <div class="divider" style="margin:16px 0;"></div>
+      <div class="row" style="justify-content:space-between;">
+        <div class="bar text-md" style="width:60px;"></div>
+        <div class="bar text-md" style="width:60px;"></div>
+      </div>
+      <div class="btn-block" style="margin-top:18px;">PLACE ORDER</div>
+    </div>
+    <div class="annot">Delivery date/time + address collected before payment. Order total recalculates live.</div>
+  </div>
+
+  <!-- SCREEN 5: ORDER CONFIRMATION -->
+  <div class="screen-block">
+    <div class="screen-label"><span class="screen-num">05</span><span class="screen-name">Order Confirmation</span></div>
+    <div class="frame">
+      <div class="statusbar"><span>9:41</span><span>▮▮▮ 100%</span></div>
+      <div class="col" style="align-items:center; gap:14px; margin-top:30px;">
+        <div class="box-x" style="width:70px;height:70px;border-radius:50%;"></div>
+        <div class="bar text-lg" style="width:60%;"></div>
+        <div class="bar text-sm" style="width:75%;"></div>
+        <div class="bar text-sm" style="width:40%;"></div>
+      </div>
+      <div class="divider" style="margin:20px 0;"></div>
+      <div class="step-track">
+        <div class="step-seg done"></div>
+        <div class="step-seg"></div>
+        <div class="step-seg"></div>
+        <div class="step-seg"></div>
+      </div>
+      <div class="row" style="justify-content:space-between; margin-top:8px;">
+        <div class="bar text-sm" style="width:50px;"></div>
+        <div class="bar text-sm" style="width:50px;"></div>
+        <div class="bar text-sm" style="width:50px;"></div>
+        <div class="bar text-sm" style="width:50px;"></div>
+      </div>
+      <div class="box-x" style="height:110px; border-radius:10px; margin-top:20px;"></div>
+      <div class="btn-outline" style="margin-top:16px;">CONTACT BAKERY</div>
+    </div>
+    <div class="annot">Order status tracker reuses the tiered progress device from the builder for consistency.</div>
+  </div>
+
+  <!-- SCREEN 6: PROFILE -->
+  <div class="screen-block">
+    <div class="screen-label"><span class="screen-num">06</span><span class="screen-name">Profile / Order History</span></div>
+    <div class="frame">
+      <div class="statusbar"><span>9:41</span><span>▮▮▮ 100%</span></div>
+      <div class="row" style="gap:12px; align-items:center; margin-top:6px;">
+        <div class="box-x" style="width:56px;height:56px;border-radius:50%;"></div>
+        <div class="col" style="gap:6px;">
+          <div class="bar text-md" style="width:100px;"></div>
+          <div class="bar text-sm" style="width:70px;"></div>
+        </div>
+      </div>
+      <div class="bar text-sm" style="width:40%; margin-top:20px;"></div>
+      <div class="row" style="gap:8px; margin-top:10px;">
+        <div class="box-x" style="width:64px;height:64px;border-radius:8px;"></div>
+        <div class="box-x" style="width:64px;height:64px;border-radius:8px;"></div>
+        <div class="box-x" style="width:64px;height:64px;border-radius:8px;"></div>
+      </div>
+      <div class="bar text-sm" style="width:40%; margin-top:20px;"></div>
+      <div class="col" style="gap:10px; margin-top:8px;">
+        <div class="row" style="justify-content:space-between;"><div class="bar text-sm" style="width:60%;"></div><div class="bar text-sm" style="width:50px;"></div></div>
+        <div class="divider"></div>
+        <div class="row" style="justify-content:space-between;"><div class="bar text-sm" style="width:60%;"></div><div class="bar text-sm" style="width:50px;"></div></div>
+        <div class="divider"></div>
+        <div class="row" style="justify-content:space-between;"><div class="bar text-sm" style="width:60%;"></div><div class="bar text-sm" style="width:50px;"></div></div>
+      </div>
+      <div class="navbar">
+        <div class="navitem"><div class="dot"></div><div class="lbl"></div></div>
+        <div class="navitem"><div class="dot"></div><div class="lbl"></div></div>
+        <div class="navitem"><div class="dot"></div><div class="lbl"></div></div>
+        <div class="navitem"><div class="dot active"></div><div class="lbl"></div></div>
+      </div>
+    </div>
+    <div class="annot">Saved designs let users reorder past custom cakes without rebuilding from scratch.</div>
+  </div>
+
+</div>
+</body>
+</html>

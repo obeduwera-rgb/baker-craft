@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BakeCraft — High-Fidelity UI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FFF6EC;
+    --ivory-deep:#FBEEDD;
+    --card:#FFFFFF;
+    --plum:#7A2E3E;
+    --plum-deep:#5C212D;
+    --plum-tint:#F3DEE2;
+    --caramel:#C98A3D;
+    --caramel-tint:#F3E1C6;
+    --rose:#F0B8C4;
+    --rose-deep:#E191A3;
+    --sage:#7C9473;
+    --sage-tint:#E3EADD;
+    --cocoa:#3B2A26;
+    --cocoa-soft:#8A746D;
+    --line:rgba(59,42,38,0.12);
+    --disp:'Fraunces', serif;
+    --body:'Nunito Sans', sans-serif;
+    --mono:'Space Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:64px 56px;
+    background:#EDEAE4;
+    font-family:var(--body);
+    color:var(--cocoa);
+  }
+  .page-head h1{
+    font-family:var(--disp);
+    font-size:26px;
+    font-weight:600;
+    margin:0 0 6px 0;
+  }
+  .page-head p{
+    font-size:13px;
+    color:var(--cocoa-soft);
+    margin:0 0 44px 0;
+  }
+  .board{ display:flex; flex-wrap:wrap; gap:48px; align-items:flex-start; }
+  .screen-block{ display:flex; flex-direction:column; gap:14px; }
+  .screen-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--plum);
+    text-transform:uppercase;
+  }
+  .screen-title{
+    font-family:var(--body);
+    font-weight:800;
+    font-size:14px;
+    color:var(--cocoa);
+    margin-top:2px;
+  }
+
+  /* ---------- PHONE FRAME ---------- */
+  .phone{
+    width:375px;
+    height:812px;
+    background:var(--ivory);
+    border-radius:44px;
+    box-shadow:0 30px 60px -20px rgba(59,42,38,0.35);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .phone.dark{ background:#241A17; }
+  .status{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 26px 6px 26px;
+    font-family:var(--body);
+    font-weight:700;
+    font-size:13px;
+    color:var(--cocoa);
+  }
+  .phone.dark .status{ color:#F3E9DE; }
+  .status .icons{ font-size:11px; letter-spacing:1px; }
+  .screen-body{ flex:1; padding:8px 22px 0 22px; overflow:hidden; position:relative; }
+  .screen-body.flush{ padding:0; }
+
+  /* ---------- TEXT SCALE ---------- */
+  .eyebrow{ font-family:var(--mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--caramel); }
+  h2.disp{ font-family:var(--disp); font-weight:600; font-size:26px; margin:4px 0; color:var(--cocoa); }
+  h3.disp{ font-family:var(--disp); font-weight:600; font-size:19px; margin:0; color:var(--cocoa); }
+  .body-txt{ font-size:13.5px; line-height:1.5; color:var(--cocoa-soft); }
+  .phone.dark h2.disp, .phone.dark h3.disp{ color:#FBEEDD; }
+  .phone.dark .body-txt{ color:#C7B7AE; }
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:flex; align-items:center; justify-content:center;
+    height:50px; border-radius:14px; font-weight:800; font-size:14px;
+    font-family:var(--body); cursor:pointer; border:none;
+  }
+  .btn-primary{ background:var(--plum); color:#fff; }
+  .btn-primary:focus-visible, .btn-secondary:focus-visible{ outline:2.5px solid var(--caramel); outline-offset:2px; }
+  .btn-secondary{ background:transparent; color:var(--plum); border:1.6px solid var(--plum); }
+  .btn-sm{ height:40px; border-radius:10px; font-size:12.5px; }
+
+  /* ---------- CHIPS / TAGS ---------- */
+  .chip{
+    font-family:var(--body); font-weight:700; font-size:12px;
+    padding:9px 15px; border-radius:20px; background:var(--card);
+    border:1.4px solid var(--line); color:var(--cocoa); white-space:nowrap;
+  }
+  .chip.active{ background:var(--plum); color:#fff; border-color:var(--plum); }
+  .chip-row{ display:flex; gap:8px; overflow:hidden; }
+
+  /* ---------- CARDS ---------- */
+  .card{ background:var(--card); border-radius:18px; border:1px solid var(--line); padding:14px; }
+  .phone.dark .card{ background:#2F2320; border-color:rgba(255,255,255,0.08); }
+
+  /* price / mono utility */
+  .price{ font-family:var(--mono); font-weight:700; }
+
+  /* ---------- BOTTOM NAV ---------- */
+  .bottomnav{
+    display:flex; justify-content:space-around; align-items:center;
+    padding:12px 10px 26px 10px; border-top:1px solid var(--line); background:var(--ivory);
+  }
+  .phone.dark .bottomnav{ background:#241A17; border-color:rgba(255,255,255,0.08); }
+  .navitem{ display:flex; flex-direction:column; align-items:center; gap:4px; width:56px; }
+  .navitem .ic{ font-size:19px; }
+  .navitem .lbl{ font-size:9.5px; font-weight:700; color:var(--cocoa-soft); }
+  .navitem.active .lbl{ color:var(--plum); }
+  .navdot{ width:5px; height:5px; border-radius:50%; background:var(--plum); }
+
+  /* ---------- SIGNATURE: TIERED CAKE MOTIF ---------- */
+  .cake{ display:flex; flex-direction:column; align-items:center; }
+  .cake .candle{ width:3px; height:16px; background:var(--caramel); border-radius:2px; margin-bottom:-2px; }
+  .cake .flame{ width:7px; height:9px; background:#E8A23A; border-radius:60% 60% 60% 60% / 70% 70% 40% 40%; margin-bottom:-2px; }
+  .tier{ border-radius:8px; position:relative; margin-top:-6px; display:flex; }
+  .tier .icing{ position:absolute; top:0; left:6%; width:88%; height:7px; background:rgba(255,255,255,0.55); border-radius:8px 8px 0 0; }
+  .tier.outline{ background:transparent; border:1.6px dashed var(--line); }
+  .tier.outline .icing{ display:none; }
+
+  /* progress tier-track (builder + order status) */
+  .tiertrack{ display:flex; gap:6px; align-items:flex-end; }
+  .tiertrack .seg{ flex:1; height:10px; border-radius:5px; background:var(--line); }
+  .tiertrack .seg.done{ background:var(--plum); }
+  .tiertrack .seg.current{ background:var(--caramel); }
+
+  .swatch-row{ display:flex; gap:10px; }
+  .swatch{
+    width:58px; height:58px; border-radius:50%; border:2.5px solid transparent;
+    display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800;
+  }
+  .swatch.sel{ border-color:var(--plum); }
+
+  .divider{ height:1px; background:var(--line); width:100%; }
+  .flex-between{ display:flex; justify-content:space-between; align-items:center; }
+  .flex-col{ display:flex; flex-direction:column; }
+  .gap-4{gap:4px;} .gap-6{gap:6px;} .gap-8{gap:8px;} .gap-10{gap:10px;} .gap-14{gap:14px;} .gap-18{gap:18px;} .gap-22{gap:22px;}
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <h1>BakeCraft — High-Fidelity UI</h1>
+  <p>10 polished screens (min. 6 required, includes 1 bonus dark-mode screen). Palette: buttercream ivory, berry plum, caramel gold, frosting rose. Display face Fraunces / body Nunito Sans / utility Space Mono. Signature element: the tiered-cake motif doubles as the builder's step-progress indicator and the order-status tracker.</p>
+</div>
+
+<div class="board">
+
+<!-- ============ 1. SPLASH ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">01 · Entry</div><div class="screen-title">Splash Screen</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;">
+      <div class="cake">
+        <div class="candle"></div><div class="flame"></div>
+        <div class="tier" style="width:44px;height:26px;background:var(--rose);"><div class="icing"></div></div>
+        <div class="tier" style="width:66px;height:30px;background:var(--caramel);"><div class="icing"></div></div>
+        <div class="tier" style="width:92px;height:36px;background:var(--plum);"><div class="icing"></div></div>
+      </div>
+      <div class="flex-col" style="align-items:center;gap:6px;">
+        <h2 class="disp" style="font-size:30px;">BakeCraft</h2>
+        <p class="body-txt" style="text-align:center;">Design your dream cake,<br>tier by tier.</p>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:20px;">
+        <div style="width:20px;height:6px;border-radius:3px;background:var(--plum);"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--line);"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--line);"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 2. ONBOARDING ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">02 · Onboarding</div><div class="screen-title">How it works (2 of 3)</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body" style="display:flex;flex-direction:column;">
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+        <div class="cake" style="transform:scale(1.5);">
+          <div class="candle"></div><div class="flame"></div>
+          <div class="tier outline" style="width:44px;height:26px;"></div>
+          <div class="tier" style="width:66px;height:30px;background:var(--caramel);"><div class="icing"></div></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--plum);"><div class="icing"></div></div>
+        </div>
+      </div>
+      <div class="flex-col gap-10" style="padding-bottom:30px;">
+        <div class="eyebrow">Step 02</div>
+        <h3 class="disp" style="font-size:22px;">Build it layer by layer</h3>
+        <p class="body-txt">Pick a size, flavor, frosting and toppings — watch your cake take shape as you go, with the price updating live.</p>
+        <div style="display:flex;gap:6px;margin:14px 0 20px 0;">
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--line);"></div>
+          <div style="width:20px;height:6px;border-radius:3px;background:var(--plum);"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:var(--line);"></div>
+        </div>
+        <div class="flex-between">
+          <span style="font-weight:800;font-size:13px;color:var(--cocoa-soft);">Skip</span>
+          <div class="btn btn-primary" style="width:120px;">Next</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3. LOGIN ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">03 · Auth</div><div class="screen-title">Log In / Register</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <div style="margin-top:26px;">
+        <div class="cake" style="transform:scale(0.8);transform-origin:left;">
+          <div class="candle"></div><div class="flame"></div>
+          <div class="tier" style="width:44px;height:26px;background:var(--rose);"><div class="icing"></div></div>
+          <div class="tier" style="width:66px;height:30px;background:var(--caramel);"><div class="icing"></div></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--plum);"><div class="icing"></div></div>
+        </div>
+      </div>
+      <h2 class="disp" style="margin-top:8px;">Welcome back</h2>
+      <p class="body-txt" style="margin-bottom:22px;">Log in to pick up your saved designs.</p>
+      <div class="flex-col gap-14">
+        <div class="flex-col gap-6">
+          <span class="eyebrow">Phone or email</span>
+          <div class="card" style="padding:14px;color:var(--cocoa-soft);font-size:13px;">aline.uwase@email.com</div>
+        </div>
+        <div class="flex-col gap-6">
+          <span class="eyebrow">Password</span>
+          <div class="card" style="padding:14px;color:var(--cocoa-soft);font-size:13px;">••••••••••</div>
+        </div>
+        <span style="align-self:flex-end;font-size:12px;font-weight:700;color:var(--plum);">Forgot password?</span>
+        <div class="btn btn-primary" style="margin-top:6px;">Log In</div>
+        <div class="flex-between" style="margin:6px 0;">
+          <div class="divider" style="flex:1;"></div>
+          <span style="padding:0 10px;font-size:11px;color:var(--cocoa-soft);">or</span>
+          <div class="divider" style="flex:1;"></div>
+        </div>
+        <div class="btn btn-secondary">Continue with Google</div>
+        <p style="text-align:center;font-size:12.5px;color:var(--cocoa-soft);margin-top:10px;">New to BakeCraft? <span style="color:var(--plum);font-weight:800;">Create account</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 4. HOME ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">04 · Discover</div><div class="screen-title">Home</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <div class="flex-between" style="margin-top:4px;">
+        <div class="flex-col gap-4">
+          <span class="eyebrow">Good afternoon</span>
+          <h3 class="disp" style="font-size:20px;">Aline 👋</h3>
+        </div>
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:16px;">🔔</div>
+      </div>
+      <div class="card" style="margin-top:16px;display:flex;align-items:center;gap:10px;padding:12px 16px;color:var(--cocoa-soft);font-size:13px;">
+        🔍 Search flavors, occasions…
+      </div>
+      <div class="chip-row" style="margin-top:14px;">
+        <div class="chip active">🎂 Birthday</div>
+        <div class="chip">💍 Wedding</div>
+        <div class="chip">🏢 Corporate</div>
+        <div class="chip">👶 Baby</div>
+      </div>
+      <div class="card" style="margin-top:16px;background:var(--plum);border:none;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+        <div class="flex-col gap-6">
+          <span class="eyebrow" style="color:var(--rose);">Continue your design</span>
+          <h3 class="disp" style="color:#fff;font-size:17px;">Amara's 5th Birthday</h3>
+          <span style="font-size:12px;color:var(--rose);">Step 2 of 4 · Flavor</span>
+        </div>
+        <div class="cake" style="transform:scale(0.6);">
+          <div class="tier outline" style="width:44px;height:26px;"></div>
+          <div class="tier" style="width:66px;height:30px;background:var(--caramel);"><div class="icing"></div></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--rose);"><div class="icing"></div></div>
+        </div>
+      </div>
+      <div class="flex-between" style="margin-top:20px;">
+        <h3 class="disp" style="font-size:16px;">Popular this week</h3>
+        <span style="font-size:12px;font-weight:800;color:var(--plum);">See all</span>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:12px;">
+        <div class="card" style="flex:1;padding:0;overflow:hidden;">
+          <div style="height:76px;background:var(--caramel-tint);display:flex;align-items:center;justify-content:center;font-size:26px;">🍰</div>
+          <div style="padding:10px;">
+            <div style="font-size:12.5px;font-weight:800;">Vanilla Bloom</div>
+            <div class="price" style="font-size:12px;color:var(--plum);margin-top:4px;">18,000 RWF</div>
+          </div>
+        </div>
+        <div class="card" style="flex:1;padding:0;overflow:hidden;">
+          <div style="height:76px;background:var(--plum-tint);display:flex;align-items:center;justify-content:center;font-size:26px;">🧁</div>
+          <div style="padding:10px;">
+            <div style="font-size:12.5px;font-weight:800;">Berry Crush 12pk</div>
+            <div class="price" style="font-size:12px;color:var(--plum);margin-top:4px;">12,500 RWF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomnav">
+      <div class="navitem active"><div class="ic">🏠</div><div class="lbl">Home</div><div class="navdot"></div></div>
+      <div class="navitem"><div class="ic">🔎</div><div class="lbl">Explore</div></div>
+      <div class="navitem"><div class="ic">🎂</div><div class="lbl">Build</div></div>
+      <div class="navitem"><div class="ic">🧾</div><div class="lbl">Orders</div></div>
+      <div class="navitem"><div class="ic">👤</div><div class="lbl">Profile</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 5. BUILDER ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">05 · Signature</div><div class="screen-title">Custom Cake Builder</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <div class="flex-between" style="margin-top:4px;">
+        <span style="font-size:18px;">←</span>
+        <span style="font-size:12.5px;font-weight:800;color:var(--cocoa-soft);">Amara's 5th Birthday</span>
+        <span style="font-size:18px;">✕</span>
+      </div>
+      <div class="tiertrack" style="margin-top:16px;">
+        <div class="seg done"></div>
+        <div class="seg current"></div>
+        <div class="seg"></div>
+        <div class="seg"></div>
+      </div>
+      <div class="flex-between" style="margin-top:8px;">
+        <span style="font-size:11px;color:var(--cocoa-soft);">Size</span>
+        <span style="font-size:11px;font-weight:800;color:var(--caramel);">Flavor</span>
+        <span style="font-size:11px;color:var(--cocoa-soft);">Frosting</span>
+        <span style="font-size:11px;color:var(--cocoa-soft);">Toppings</span>
+      </div>
+      <div class="eyebrow" style="margin-top:20px;">Step 2 of 4</div>
+      <h3 class="disp" style="font-size:20px;">Choose your flavor</h3>
+      <div class="swatch-row" style="margin-top:16px;">
+        <div class="swatch sel" style="background:var(--rose-deep);color:#fff;">Red<br>Velvet</div>
+        <div class="swatch" style="background:var(--caramel-tint);">Vanilla</div>
+        <div class="swatch" style="background:#8C5A3C;color:#fff;">Choc.</div>
+        <div class="swatch" style="background:#E8D24A;">Lemon</div>
+      </div>
+      <div class="card" style="margin-top:22px;display:flex;align-items:center;justify-content:center;height:180px;background:var(--ivory-deep);">
+        <div class="cake" style="transform:scale(1.15);">
+          <div class="candle"></div><div class="flame"></div>
+          <div class="tier outline" style="width:44px;height:26px;"></div>
+          <div class="tier outline" style="width:66px;height:30px;"></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--rose-deep);"><div class="icing"></div></div>
+        </div>
+      </div>
+      <div class="flex-between" style="margin-top:16px;">
+        <span class="body-txt">Live preview updates as you choose</span>
+        <span class="price" style="font-size:14px;color:var(--plum);">21,000 RWF</span>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <div class="btn btn-secondary btn-sm" style="flex:1;">Back</div>
+        <div class="btn btn-primary btn-sm" style="flex:2;">Next: Frosting</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 6. PREVIEW & ADD TO CART ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">06 · Preview</div><div class="screen-title">Design Preview</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <div class="flex-between" style="margin-top:4px;">
+        <span style="font-size:18px;">←</span>
+        <span style="font-size:12.5px;font-weight:800;color:var(--cocoa-soft);">Your design is ready 🎉</span>
+        <span style="font-size:18px;">♡</span>
+      </div>
+      <div class="card" style="margin-top:16px;height:220px;background:var(--ivory-deep);display:flex;align-items:center;justify-content:center;">
+        <div class="cake" style="transform:scale(1.5);">
+          <div class="candle"></div><div class="flame"></div>
+          <div class="tier" style="width:44px;height:26px;background:var(--caramel);"><div class="icing"></div></div>
+          <div class="tier" style="width:66px;height:30px;background:var(--rose-deep);"><div class="icing"></div></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--plum);"><div class="icing"></div></div>
+        </div>
+      </div>
+      <h3 class="disp" style="margin-top:16px;">"Happy 5th, Amara!"</h3>
+      <p class="body-txt">3-tier · Red velvet &amp; vanilla · Rose frosting · Serves 20</p>
+      <div class="divider" style="margin:16px 0;"></div>
+      <div class="flex-col gap-8">
+        <div class="flex-between"><span class="body-txt">Cake base</span><span class="price" style="font-size:12.5px;">15,000 RWF</span></div>
+        <div class="flex-between"><span class="body-txt">Custom frosting</span><span class="price" style="font-size:12.5px;">4,000 RWF</span></div>
+        <div class="flex-between"><span class="body-txt">Message &amp; toppers</span><span class="price" style="font-size:12.5px;">2,000 RWF</span></div>
+      </div>
+      <div class="divider" style="margin:16px 0;"></div>
+      <div class="flex-between">
+        <h3 class="disp" style="font-size:17px;">Total</h3>
+        <span class="price" style="font-size:18px;color:var(--plum);">21,000 RWF</span>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:18px;">
+        <div class="btn btn-secondary btn-sm" style="flex:1;">Edit design</div>
+        <div class="btn btn-primary btn-sm" style="flex:2;">Add to Cart</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 7. CART & CHECKOUT ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">07 · Checkout</div><div class="screen-title">Cart &amp; Delivery</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <h2 class="disp" style="font-size:22px;margin-top:4px;">Your Cart <span style="font-size:14px;color:var(--cocoa-soft);font-family:var(--body);">(1 item)</span></h2>
+      <div class="card" style="margin-top:14px;display:flex;gap:12px;align-items:center;">
+        <div style="width:56px;height:56px;border-radius:12px;background:var(--ivory-deep);display:flex;align-items:center;justify-content:center;font-size:22px;">🎂</div>
+        <div class="flex-col gap-4" style="flex:1;">
+          <span style="font-size:13px;font-weight:800;">Amara's 5th Birthday</span>
+          <span style="font-size:11.5px;color:var(--cocoa-soft);">3-tier · Serves 20</span>
+        </div>
+        <span class="price" style="font-size:13px;">21,000 RWF</span>
+      </div>
+      <div class="eyebrow" style="margin-top:20px;">Delivery date &amp; time</div>
+      <div class="card" style="margin-top:8px;padding:14px;font-size:13px;color:var(--cocoa-soft);">Sat, 2 Aug · 2:00 PM</div>
+      <div class="eyebrow" style="margin-top:14px;">Delivery address</div>
+      <div class="card" style="margin-top:8px;padding:14px;font-size:13px;color:var(--cocoa-soft);">KG 11 Ave, Kacyiru, Kigali</div>
+      <div class="eyebrow" style="margin-top:14px;">Promo code</div>
+      <div class="card" style="margin-top:8px;padding:14px;font-size:13px;color:var(--cocoa-soft);display:flex;justify-content:space-between;">
+        <span>Have a code?</span><span style="color:var(--plum);font-weight:800;">Apply</span>
+      </div>
+      <div class="divider" style="margin:16px 0;"></div>
+      <div class="flex-between"><span class="body-txt">Subtotal</span><span class="price" style="font-size:12.5px;">21,000 RWF</span></div>
+      <div class="flex-between" style="margin-top:6px;"><span class="body-txt">Delivery</span><span class="price" style="font-size:12.5px;">2,000 RWF</span></div>
+      <div class="flex-between" style="margin-top:10px;"><h3 class="disp" style="font-size:16px;">Total</h3><span class="price" style="font-size:16px;color:var(--plum);">23,000 RWF</span></div>
+      <div class="btn btn-primary" style="margin-top:18px;">Place Order</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 8. ORDER CONFIRMATION / TRACKING ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">08 · Status</div><div class="screen-title">Order Confirmation &amp; Tracking</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body" style="text-align:center;">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--sage-tint);display:flex;align-items:center;justify-content:center;font-size:28px;margin:20px auto 0 auto;">✓</div>
+      <h2 class="disp" style="font-size:21px;">Order confirmed!</h2>
+      <p class="body-txt">Order #BC-10432 · Baked fresh for<br>Sat, 2 Aug · 2:00 PM</p>
+      <div class="card" style="margin-top:18px;text-align:left;">
+        <div class="eyebrow" style="margin-bottom:14px;">Order status</div>
+        <div class="tiertrack">
+          <div class="seg done"></div>
+          <div class="seg current"></div>
+          <div class="seg"></div>
+          <div class="seg"></div>
+          <div class="seg"></div>
+        </div>
+        <div class="flex-between" style="margin-top:8px;">
+          <span style="font-size:9.5px;color:var(--cocoa-soft);">Confirmed</span>
+          <span style="font-size:9.5px;font-weight:800;color:var(--caramel);">Baking</span>
+          <span style="font-size:9.5px;color:var(--cocoa-soft);">Decorating</span>
+          <span style="font-size:9.5px;color:var(--cocoa-soft);">On the way</span>
+          <span style="font-size:9.5px;color:var(--cocoa-soft);">Delivered</span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px;display:flex;align-items:center;gap:12px;text-align:left;">
+        <div class="cake" style="transform:scale(0.55);">
+          <div class="tier" style="width:44px;height:26px;background:var(--caramel);"><div class="icing"></div></div>
+          <div class="tier" style="width:66px;height:30px;background:var(--rose-deep);"><div class="icing"></div></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--plum);"><div class="icing"></div></div>
+        </div>
+        <div class="flex-col gap-4">
+          <span style="font-size:12.5px;font-weight:800;">Amara's 5th Birthday</span>
+          <span style="font-size:11px;color:var(--cocoa-soft);">Estimated: Sat, 1:45 PM</span>
+        </div>
+      </div>
+      <div class="btn btn-secondary" style="margin-top:18px;">Contact Bakery</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 9. PROFILE ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">09 · Account</div><div class="screen-title">Profile / Order History</div></div>
+  <div class="phone">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <div style="display:flex;gap:14px;align-items:center;margin-top:6px;">
+        <div style="width:60px;height:60px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:24px;">👩🏾</div>
+        <div class="flex-col gap-4">
+          <h3 class="disp" style="font-size:18px;">Aline Uwase</h3>
+          <span style="font-size:12px;color:var(--cocoa-soft);">aline.uwase@email.com</span>
+        </div>
+      </div>
+      <div class="eyebrow" style="margin-top:20px;">Saved designs</div>
+      <div style="display:flex;gap:10px;margin-top:10px;">
+        <div class="card" style="width:70px;height:70px;padding:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🎂</div>
+        <div class="card" style="width:70px;height:70px;padding:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🧁</div>
+        <div class="card" style="width:70px;height:70px;padding:0;display:flex;align-items:center;justify-content:center;font-size:22px;">🍰</div>
+      </div>
+      <div class="eyebrow" style="margin-top:20px;">Recent orders</div>
+      <div class="flex-col gap-10" style="margin-top:10px;">
+        <div class="flex-between"><span style="font-size:13px;font-weight:700;">Amara's 5th Birthday</span><span style="font-size:11.5px;font-weight:800;color:var(--plum);">Reorder</span></div>
+        <div class="divider"></div>
+        <div class="flex-between"><span style="font-size:13px;font-weight:700;">Berry Crush Cupcakes</span><span style="font-size:11.5px;font-weight:800;color:var(--plum);">Reorder</span></div>
+        <div class="divider"></div>
+        <div class="flex-between"><span style="font-size:13px;font-weight:700;">Office Farewell Cake</span><span style="font-size:11.5px;font-weight:800;color:var(--plum);">Reorder</span></div>
+      </div>
+      <div class="eyebrow" style="margin-top:20px;">Settings</div>
+      <div class="flex-col gap-10" style="margin-top:10px;">
+        <div class="flex-between"><span class="body-txt">Delivery addresses</span><span>›</span></div>
+        <div class="divider"></div>
+        <div class="flex-between"><span class="body-txt">Payment methods</span><span>›</span></div>
+        <div class="divider"></div>
+        <div class="flex-between"><span class="body-txt">Dark mode</span><span>›</span></div>
+      </div>
+    </div>
+    <div class="bottomnav">
+      <div class="navitem"><div class="ic">🏠</div><div class="lbl">Home</div></div>
+      <div class="navitem"><div class="ic">🔎</div><div class="lbl">Explore</div></div>
+      <div class="navitem"><div class="ic">🎂</div><div class="lbl">Build</div></div>
+      <div class="navitem"><div class="ic">🧾</div><div class="lbl">Orders</div></div>
+      <div class="navitem active"><div class="ic">👤</div><div class="lbl">Profile</div><div class="navdot"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 10. BONUS: HOME — DARK MODE ============ -->
+<div class="screen-block">
+  <div><div class="screen-tag">10 · Bonus</div><div class="screen-title">Home — Dark Mode</div></div>
+  <div class="phone dark">
+    <div class="status"><span>9:41</span><span class="icons">●●● 100%</span></div>
+    <div class="screen-body">
+      <div class="flex-between" style="margin-top:4px;">
+        <div class="flex-col gap-4">
+          <span class="eyebrow">Good evening</span>
+          <h3 class="disp" style="font-size:20px;">Aline 👋</h3>
+        </div>
+        <div style="width:40px;height:40px;border-radius:50%;background:#3A2A26;display:flex;align-items:center;justify-content:center;font-size:16px;">🔔</div>
+      </div>
+      <div style="margin-top:16px;background:#2F2320;border:1px solid rgba(255,255,255,0.08);border-radius:18px;display:flex;align-items:center;gap:10px;padding:12px 16px;color:#C7B7AE;font-size:13px;">
+        🔍 Search flavors, occasions…
+      </div>
+      <div class="chip-row" style="margin-top:14px;">
+        <div class="chip active">🎂 Birthday</div>
+        <div class="chip" style="background:#2F2320;border-color:rgba(255,255,255,0.1);color:#F3E9DE;">💍 Wedding</div>
+        <div class="chip" style="background:#2F2320;border-color:rgba(255,255,255,0.1);color:#F3E9DE;">🏢 Corporate</div>
+      </div>
+      <div class="card" style="margin-top:16px;background:var(--caramel);border:none;color:#241A17;display:flex;justify-content:space-between;align-items:center;">
+        <div class="flex-col gap-6">
+          <span class="eyebrow" style="color:var(--plum-deep);">Continue your design</span>
+          <h3 class="disp" style="color:#241A17;font-size:17px;">Amara's 5th Birthday</h3>
+          <span style="font-size:12px;color:var(--plum-deep);">Step 2 of 4 · Flavor</span>
+        </div>
+        <div class="cake" style="transform:scale(0.6);">
+          <div class="tier outline" style="width:44px;height:26px;border-color:rgba(36,26,23,0.3);"></div>
+          <div class="tier" style="width:66px;height:30px;background:var(--plum);"><div class="icing"></div></div>
+          <div class="tier" style="width:92px;height:36px;background:var(--rose);"><div class="icing"></div></div>
+        </div>
+      </div>
+      <div class="flex-between" style="margin-top:20px;">
+        <h3 class="disp" style="font-size:16px;">Popular this week</h3>
+        <span style="font-size:12px;font-weight:800;color:var(--rose);">See all</span>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:12px;">
+        <div class="card" style="flex:1;padding:0;overflow:hidden;">
+          <div style="height:76px;background:#3A2A26;display:flex;align-items:center;justify-content:center;font-size:26px;">🍰</div>
+          <div style="padding:10px;">
+            <div style="font-size:12.5px;font-weight:800;">Vanilla Bloom</div>
+            <div class="price" style="font-size:12px;color:var(--rose);margin-top:4px;">18,000 RWF</div>
+          </div>
+        </div>
+        <div class="card" style="flex:1;padding:0;overflow:hidden;">
+          <div style="height:76px;background:#3A2A26;display:flex;align-items:center;justify-content:center;font-size:26px;">🧁</div>
+          <div style="padding:10px;">
+            <div style="font-size:12.5px;font-weight:800;">Berry Crush 12pk</div>
+            <div class="price" style="font-size:12px;color:var(--rose);margin-top:4px;">12,500 RWF</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomnav">
+      <div class="navitem active"><div class="ic">🏠</div><div class="lbl" style="color:var(--rose);">Home</div><div class="navdot" style="background:var(--rose);"></div></div>
+      <div class="navitem"><div class="ic">🔎</div><div class="lbl">Explore</div></div>
+      <div class="navitem"><div class="ic">🎂</div><div class="lbl">Build</div></div>
+      <div class="navitem"><div class="ic">🧾</div><div class="lbl">Orders</div></div>
+      <div class="navitem"><div class="ic">👤</div><div class="lbl">Profile</div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

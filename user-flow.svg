@@ -1,0 +1,114 @@
+<svg width="860" height="1480" viewBox="0 0 860 1480" xmlns="http://www.w3.org/2000/svg" font-family="Nunito Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C98A3D"/>
+    </marker>
+    <marker id="arrowDash" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#E191A3"/>
+    </marker>
+  </defs>
+
+  <rect width="860" height="1480" fill="#EDEAE4"/>
+  <text x="40" y="46" font-size="22" font-weight="700" fill="#3B2A26">BakeCraft — User Flow</text>
+  <text x="40" y="70" font-size="13" fill="#8A746D">Primary path: sign-up through order delivery, with the Custom Builder as the core sub-flow.</text>
+
+  <!-- MAIN COLUMN -->
+  <!-- Splash -->
+  <rect x="270" y="100" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="135" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Splash Screen</text>
+  <line x1="400" y1="160" x2="400" y2="195" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Onboarding -->
+  <rect x="270" y="196" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="231" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Onboarding (3 slides)</text>
+  <line x1="400" y1="256" x2="400" y2="291" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Login/Register -->
+  <rect x="270" y="292" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="327" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Log In / Register</text>
+  <line x1="400" y1="352" x2="400" y2="387" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Home -->
+  <rect x="270" y="388" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="423" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Home (browse categories)</text>
+  <line x1="400" y1="448" x2="400" y2="483" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Builder container -->
+  <rect x="150" y="484" width="500" height="200" rx="18" fill="none" stroke="#C98A3D" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="400" y="510" font-size="13" font-weight="700" fill="#C98A3D" text-anchor="middle">CUSTOM CAKE BUILDER</text>
+
+  <rect x="170" y="525" width="105" height="55" rx="12" fill="#F0B8C4"/>
+  <text x="222" y="557" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">1. Size &amp;</text>
+  <text x="222" y="571" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">Shape</text>
+  <line x1="275" y1="552" x2="300" y2="552" stroke="#7A2E3E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="300" y="525" width="105" height="55" rx="12" fill="#F0B8C4"/>
+  <text x="352" y="557" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">2. Flavor &amp;</text>
+  <text x="352" y="571" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">Filling</text>
+  <line x1="405" y1="552" x2="430" y2="552" stroke="#7A2E3E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="430" y="525" width="105" height="55" rx="12" fill="#F0B8C4"/>
+  <text x="482" y="557" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">3. Frosting</text>
+  <text x="482" y="571" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">&amp; Color</text>
+  <line x1="482" y1="580" x2="482" y2="615" stroke="#7A2E3E" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="360" y="616" width="175" height="55" rx="12" fill="#F0B8C4"/>
+  <text x="447" y="640" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">4. Toppings, Message</text>
+  <text x="447" y="655" font-size="12.5" font-weight="700" fill="#3B2A26" text-anchor="middle">&amp; Candles</text>
+
+  <line x1="400" y1="684" x2="400" y2="719" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Design Preview -->
+  <rect x="270" y="720" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="746" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Design Preview</text>
+  <text x="400" y="764" font-size="11" fill="#F0B8C4" text-anchor="middle">live render + price breakdown</text>
+  <line x1="400" y1="780" x2="400" y2="815" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Add to cart -->
+  <rect x="270" y="816" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="851" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Add to Cart</text>
+  <line x1="400" y1="876" x2="400" y2="911" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Checkout -->
+  <rect x="270" y="912" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="938" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Checkout</text>
+  <text x="400" y="956" font-size="11" fill="#F0B8C4" text-anchor="middle">delivery date, time &amp; address</text>
+  <line x1="400" y1="972" x2="400" y2="1007" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Payment -->
+  <rect x="270" y="1008" width="260" height="60" rx="14" fill="#7A2E3E"/>
+  <text x="400" y="1043" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Payment</text>
+  <line x1="400" y1="1068" x2="400" y2="1103" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Order Confirmation -->
+  <rect x="270" y="1104" width="260" height="60" rx="14" fill="#7C9473"/>
+  <text x="400" y="1139" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Order Confirmation</text>
+  <line x1="400" y1="1164" x2="400" y2="1199" stroke="#C98A3D" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Order Tracking -->
+  <rect x="270" y="1200" width="260" height="60" rx="14" fill="#7C9473"/>
+  <text x="400" y="1226" font-size="14.5" font-weight="700" fill="#FFF6EC" text-anchor="middle">Order Tracking</text>
+  <text x="400" y="1244" font-size="11" fill="#E3EADD" text-anchor="middle">Confirmed → Baking → Decorating → Delivered</text>
+
+  <!-- Side branch: Profile -->
+  <rect x="650" y="388" width="170" height="60" rx="14" fill="#C98A3D"/>
+  <text x="735" y="415" font-size="13" font-weight="700" fill="#3B2A26" text-anchor="middle">Profile /</text>
+  <text x="735" y="431" font-size="13" font-weight="700" fill="#3B2A26" text-anchor="middle">Order History</text>
+
+  <path d="M530,410 C 590,410 590,410 648,412" fill="none" stroke="#E191A3" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowDash)"/>
+  <path d="M735,448 C 735,900 735,1100 532,1225" fill="none" stroke="#E191A3" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowDash)"/>
+
+  <text x="820" y="1300" font-size="10.5" fill="#8A746D" text-anchor="end" transform="rotate(0)"></text>
+  <text x="530" y="1290" font-size="11" fill="#8A746D">↳ Profile / Order History is reachable anytime from the bottom nav</text>
+  <text x="530" y="1306" font-size="11" fill="#8A746D">   (dashed lines), including reordering a saved design back into the Builder.</text>
+
+  <!-- Legend -->
+  <rect x="40" y="1380" width="16" height="16" rx="4" fill="#7A2E3E"/>
+  <text x="64" y="1393" font-size="11.5" fill="#3B2A26">Core screen</text>
+  <rect x="180" y="1380" width="16" height="16" rx="4" fill="#F0B8C4"/>
+  <text x="204" y="1393" font-size="11.5" fill="#3B2A26">Builder sub-step</text>
+  <rect x="340" y="1380" width="16" height="16" rx="4" fill="#7C9473"/>
+  <text x="364" y="1393" font-size="11.5" fill="#3B2A26">Post-purchase</text>
+  <rect x="480" y="1380" width="16" height="16" rx="4" fill="#C98A3D"/>
+  <text x="504" y="1393" font-size="11.5" fill="#3B2A26">Anytime-access hub</text>
+</svg>
