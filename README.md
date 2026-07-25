@@ -19,7 +19,7 @@ Project/
 │   └── user-flow.svg              → user flow diagram
 │
 ├── prototype/
-│   └── (link the interactive Figma prototype here after importing)
+│   
 │
 ├── documentation.md                → full write-up: problem, personas, flow, design rationale, accessibility
 └── README.md                       → this file
@@ -27,8 +27,8 @@ Project/
 
 ## Group
 
-- Members: **[Uwera Ishimwe Obed]**
-- Registration numbers: **[20251NET006]**
+- Members: **Uwera Ishimwe Obed** | **Iranzi greg**
+- Registration numbers: **20251NET006** | **2025IMA045
 
 ## Figma project link
 
